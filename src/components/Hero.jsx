@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight, Play, Star } from 'lucide-react';
 
-const Hero: React.FC = () => {
+const Hero = () => {
   return (
     <section className="pt-24 pb-16 bg-gradient-to-br from-indigo-50 via-white to-purple-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

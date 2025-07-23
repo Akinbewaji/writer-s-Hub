@@ -1,24 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Heart, MessageSquare, Clock, Bookmark, Eye } from 'lucide-react';
-import { Story } from '../types';
 import { useApp } from '../context/AppContext';
 import { formatRelativeTime, getInitials } from '../utils/helpers';
 
-interface StoryCardProps {
-  story: Story;
-  showStats?: boolean;
-}
-
-const StoryCard: React.FC<StoryCardProps> = ({ story, showStats = true }) => {
+const StoryCard = ({ story, showStats = true }) => {
   const { dispatch } = useApp();
 
-  const handleLike = (e: React.MouseEvent) => {
+  const handleLike = (e) => {
     e.preventDefault();
     dispatch({ type: 'LIKE_STORY', payload: story.id });
   };
 
-  const handleBookmark = (e: React.MouseEvent) => {
+  const handleBookmark = (e) => {
     e.preventDefault();
     dispatch({ type: 'BOOKMARK_STORY', payload: story.id });
   };

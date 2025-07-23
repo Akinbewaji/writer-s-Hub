@@ -1,7 +1,7 @@
 import React from 'react';
 import { PenTool, BookOpen, Users, MessageSquare, TrendingUp, Shield } from 'lucide-react';
 
-const Features: React.FC = () => {
+const Features = () => {
   const features = [
     {
       icon: PenTool,

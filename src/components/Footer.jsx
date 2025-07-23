@@ -1,7 +1,7 @@
 import React from 'react';
 import { BookOpen, Twitter, Facebook, Instagram, Github, Mail } from 'lucide-react';
 
-const Footer: React.FC = () => {
+const Footer = () => {
   const footerSections = [
     {
       title: 'Platform',

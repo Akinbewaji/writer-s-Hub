@@ -1,6 +1,4 @@
-import { User, Story, Comment, Discussion, Event, Group, Achievement, Activity } from '../types';
-
-const users: User[] = [
+const users = [
   {
     id: '1',
     name: 'Alex Chen',
@@ -34,7 +32,7 @@ const users: User[] = [
   }
 ];
 
-const stories: Story[] = [
+const stories = [
   {
     id: '1',
     title: "The Last Library",
@@ -107,7 +105,7 @@ Tonight, I find myself thinking about the paths not taken, the words left unspok
   }
 ];
 
-const comments: Comment[] = [
+const comments = [
   {
     id: '1',
     content: "This story gave me chills! The parallels to our current digital age are striking. Beautiful writing.",
@@ -126,7 +124,7 @@ const comments: Comment[] = [
   }
 ];
 
-const discussions: Discussion[] = [
+const discussions = [
   {
     id: '1',
     title: "What's your writing routine?",
@@ -149,7 +147,7 @@ const discussions: Discussion[] = [
   }
 ];
 
-const events: Event[] = [
+const events = [
   {
     id: '1',
     title: "Weekly Writing Challenge: Time Travel",
@@ -170,7 +168,7 @@ const events: Event[] = [
   }
 ];
 
-const groups: Group[] = [
+const groups = [
   {
     id: '1',
     name: "Sci-Fi Writers Circle",
@@ -187,7 +185,7 @@ const groups: Group[] = [
   }
 ];
 
-const achievements: Achievement[] = [
+const achievements = [
   {
     id: '1',
     title: "First Story",
@@ -206,7 +204,7 @@ const achievements: Achievement[] = [
   }
 ];
 
-const activities: Activity[] = [
+const activities = [
   {
     id: '1',
     type: 'like',

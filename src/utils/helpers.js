@@ -1,6 +1,6 @@
 import { formatDistanceToNow } from 'date-fns';
 
-export const formatDate = (date: string | Date): string => {
+export const formatDate = (date) => {
   const dateObj = typeof date === 'string' ? new Date(date) : date;
   return dateObj.toLocaleDateString('en-US', {
     year: 'numeric',
@@ -9,27 +9,27 @@ export const formatDate = (date: string | Date): string => {
   });
 };
 
-export const formatRelativeTime = (date: string | Date): string => {
+export const formatRelativeTime = (date) => {
   const dateObj = typeof date === 'string' ? new Date(date) : date;
   return formatDistanceToNow(dateObj, { addSuffix: true });
 };
 
-export const calculateReadTime = (content: string): number => {
+export const calculateReadTime = (content) => {
   const wordsPerMinute = 200;
   const wordCount = content.split(/\s+/).length;
   return Math.max(1, Math.ceil(wordCount / wordsPerMinute));
 };
 
-export const generateId = (): string => {
+export const generateId = () => {
   return Math.random().toString(36).substr(2, 9);
 };
 
-export const truncateText = (text: string, maxLength: number): string => {
+export const truncateText = (text, maxLength) => {
   if (text.length <= maxLength) return text;
   return text.substr(0, maxLength) + '...';
 };
 
-export const slugify = (text: string): string => {
+export const slugify = (text) => {
   return text
     .toLowerCase()
     .replace(/[^\w\s-]/g, '')
@@ -37,7 +37,7 @@ export const slugify = (text: string): string => {
     .replace(/^-+|-+$/g, '');
 };
 
-export const getInitials = (name: string): string => {
+export const getInitials = (name) => {
   return name
     .split(' ')
     .map(n => n[0])
@@ -45,7 +45,7 @@ export const getInitials = (name: string): string => {
     .toUpperCase();
 };
 
-export const formatNumber = (num: number): string => {
+export const formatNumber = (num) => {
   if (num >= 1000000) {
     return (num / 1000000).toFixed(1) + 'M';
   }

@@ -4,13 +4,13 @@ import { Menu, X, BookOpen, PenTool, Users, User, LogOut } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { getInitials } from '../utils/helpers';
 
-const Header: React.FC = () => {
+const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const location = useLocation();
   const { state, dispatch } = useApp();
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path) => location.pathname === path;
 
   const handleSignIn = () => {
     // Simulate sign in - in a real app, this would be proper authentication
