@@ -1,4 +1,3 @@
-@@ .. @@
 +import React from 'react';
 +import { Users, MessageSquare, Calendar, Award, Globe, Zap, Heart, Star } from 'lucide-react';
 +
