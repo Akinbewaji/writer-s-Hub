@@ -21,7 +21,12 @@ const appReducer = (state, action) => {
       return {
         ...state,
         currentUser: action.payload,
-        isAuthenticated: !!action.payload
+        isAuthenticated: !!action.payload,
+        // Clear user-specific data when signing out
+        ...(action.payload === null && {
+          bookmarkedStories: [],
+          userStories: []
+        })
       };
 
     case 'ADD_STORY':

@@ -25,6 +25,8 @@ const Header = () => {
     localStorage.removeItem('currentUser');
     dispatch({ type: 'SET_USER', payload: null });
     setIsProfileMenuOpen(false);
+    // Redirect to home page after sign out
+    window.location.href = '/';
   };
 
   return (
