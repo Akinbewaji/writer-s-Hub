@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, BookOpen, Mail, Lock, ArrowRight, Github, Twitter, Facebook } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import userDatabase from '../utils/userDatabase';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -22,8 +23,14 @@ const SignIn = () => {
     // Simulate API call
     setTimeout(() => {
       if (email && password) {
-        const user = {
-          id: '1',
+        // Generate unique user ID or use existing one
+        let userId = userDatabase.generateUserId();
+        
+        // Check if user exists (in real app, this would be server-side)
+        const existingUser = userDatabase.getUserProfile(userId);
+        
+        const user = existingUser || {
+          id: userId,
           name: 'Alex Chen',
           email: email,
           bio: 'Passionate storyteller exploring the intersection of technology and humanity.',
@@ -34,8 +41,20 @@ const SignIn = () => {
           following: 123
         };
         
+        // Initialize user database if new user
+        if (!existingUser) {
+          userDatabase.initializeUser(userId, user);
+        }
+        
+        // Log login activity
+        userDatabase.logActivity(userId, {
+          type: 'user_login',
+          email: email
+        });
+        
         localStorage.setItem('currentUser', JSON.stringify(user));
         dispatch({ type: 'SET_USER', payload: user });
+        dispatch({ type: 'LOAD_USER_DATA', payload: { userId: user.id } });
         navigate('/dashboard');
       } else {
         setError('Please fill in all fields');

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, BookOpen, Mail, Lock, User, ArrowRight, Github, Twitter, CheckCircle } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import userDatabase from '../utils/userDatabase';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -85,8 +86,9 @@ const SignUp = () => {
 
     // Simulate API call
     setTimeout(() => {
+      const userId = userDatabase.generateUserId();
       const user = {
-        id: '1',
+        id: userId,
         name: `${formData.firstName} ${formData.lastName}`,
         email: formData.email,
         bio: 'New writer exploring the world of storytelling.',
@@ -97,8 +99,18 @@ const SignUp = () => {
         following: 0
       };
       
+      // Initialize user database
+      userDatabase.initializeUser(userId, user);
+      
+      // Log registration activity
+      userDatabase.logActivity(userId, {
+        type: 'user_registered',
+        email: formData.email
+      });
+      
       localStorage.setItem('currentUser', JSON.stringify(user));
       dispatch({ type: 'SET_USER', payload: user });
+      dispatch({ type: 'LOAD_USER_DATA', payload: { userId: user.id } });
       navigate('/dashboard');
       setIsLoading(false);
     }, 1000);

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { TrendingUp, Users, BookOpen, MessageSquare, Eye, Heart, Calendar, Plus } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import userDatabase from '../utils/userDatabase';
 
 const Dashboard = () => {
   const { state } = useApp();
@@ -11,46 +12,54 @@ const Dashboard = () => {
     return <Navigate to="/signin" replace />;
   }
 
+  // Get user-specific dashboard data
+  const dashboardData = userDatabase.getUserDashboardData(state.currentUser.id);
+  const userStories = dashboardData.stories || [];
+  const userActivity = dashboardData.activity || [];
+  const userStats = dashboardData.stats || {};
+
   const stats = [
-    { label: 'Total Views', value: '12,847', change: '+12%', icon: Eye, color: 'text-blue-600' },
-    { label: 'Stories Published', value: '24', change: '+3', icon: BookOpen, color: 'text-green-600' },
-    { label: 'Total Likes', value: '1,847', change: '+8%', icon: Heart, color: 'text-red-600' },
-    { label: 'New Followers', value: '156', change: '+15%', icon: Users, color: 'text-purple-600' }
+    { label: 'Total Views', value: userStats.totalViews?.toLocaleString() || '0', change: '+12%', icon: Eye, color: 'text-blue-600' },
+    { label: 'Stories Published', value: userStats.storiesPublished?.toString() || '0', change: '+3', icon: BookOpen, color: 'text-green-600' },
+    { label: 'Total Likes', value: userStats.totalLikes?.toLocaleString() || '0', change: '+8%', icon: Heart, color: 'text-red-600' },
+    { label: 'Followers', value: userStats.followers?.toString() || '0', change: '+15%', icon: Users, color: 'text-purple-600' }
   ];
 
-  const recentStories = [
-    {
-      title: "The Digital Nomad's Journey",
-      views: 1234,
-      likes: 89,
-      comments: 23,
-      publishDate: "2024-02-15",
-      status: "published"
-    },
-    {
-      title: "Midnight Reflections",
-      views: 856,
-      likes: 67,
-      comments: 15,
-      publishDate: "2024-02-10",
-      status: "published"
-    },
-    {
-      title: "The Art of Slow Living",
-      views: 0,
-      likes: 0,
-      comments: 0,
-      publishDate: null,
-      status: "draft"
+  // Format user stories for display
+  const recentStories = userStories.slice(0, 5).map(story => ({
+    title: story.title,
+    views: story.views || 0,
+    likes: story.likes || 0,
+    comments: story.comments || 0,
+    publishDate: story.publishDate ? new Date(story.publishDate).toLocaleDateString() : null,
+    status: story.status || 'draft'
+  }));
+
+  // Format user activity for display
+  const recentActivity = userActivity.map(activity => ({
+    type: activity.type,
+    description: getActivityDescription(activity),
+    time: new Date(activity.timestamp).toLocaleString()
+  }));
+
+  function getActivityDescription(activity) {
+    switch (activity.type) {
+      case 'story_created':
+        return `Created story "${activity.storyTitle}"`;
+      case 'story_updated':
+        return `Updated story "${activity.storyTitle}"`;
+      case 'story_liked':
+        return `Liked story "${activity.storyTitle}"`;
+      case 'comment_added':
+        return `Commented on "${activity.storyTitle}"`;
+      case 'user_followed':
+        return `Followed ${activity.targetUserName}`;
+      case 'user_login':
+        return 'Signed in to account';
+      default:
+        return 'Activity recorded';
     }
-  ];
-
-  const recentActivity = [
-    { type: 'like', user: 'Sarah M.', story: 'The Digital Nomad\'s Journey', time: '2 hours ago' },
-    { type: 'comment', user: 'James P.', story: 'Midnight Reflections', time: '4 hours ago' },
-    { type: 'follow', user: 'Emma R.', story: null, time: '6 hours ago' },
-    { type: 'like', user: 'Alex C.', story: 'The Digital Nomad\'s Journey', time: '8 hours ago' }
-  ];
+  }
 
   return (
     <div className="pt-16 min-h-screen bg-gray-50">
@@ -95,7 +104,7 @@ const Dashboard = () => {
               </div>
               <div className="p-6">
                 <div className="space-y-4">
-                  {recentStories.map((story, index) => (
+                  {recentStories.length > 0 ? recentStories.map((story, index) => (
                     <div key={index} className="flex items-center justify-between p-4 hover:bg-gray-50 rounded-lg transition-colors">
                       <div className="flex-1">
                         <h3 className="font-semibold text-gray-900 mb-1">{story.title}</h3>
@@ -125,7 +134,18 @@ const Dashboard = () => {
                         </div>
                       </div>
                     </div>
-                  ))}
+                  )) : (
+                    <div className="text-center py-8">
+                      <BookOpen className="h-12 w-12 text-gray-300 mx-auto mb-4" />
+                      <p className="text-gray-500">No stories yet. Start writing your first story!</p>
+                      <Link 
+                        to="/write"
+                        className="mt-4 inline-block bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors"
+                      >
+                        Write Your First Story
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -156,27 +176,27 @@ const Dashboard = () => {
               </div>
               <div className="p-6">
                 <div className="space-y-4">
-                  {recentActivity.map((activity, index) => (
+                  {recentActivity.length > 0 ? recentActivity.map((activity, index) => (
                     <div key={index} className="flex items-start space-x-3">
                       <div className={`w-2 h-2 rounded-full mt-2 ${
-                        activity.type === 'like' ? 'bg-red-500' :
-                        activity.type === 'comment' ? 'bg-blue-500' :
+                        activity.type.includes('like') ? 'bg-red-500' :
+                        activity.type.includes('comment') ? 'bg-blue-500' :
+                        activity.type.includes('story') ? 'bg-green-500' :
                         'bg-green-500'
                       }`}></div>
                       <div className="flex-1">
                         <p className="text-sm text-gray-900">
-                          <span className="font-medium">{activity.user}</span>
-                          {activity.type === 'like' && ' liked your story '}
-                          {activity.type === 'comment' && ' commented on '}
-                          {activity.type === 'follow' && ' started following you'}
-                          {activity.story && (
-                            <span className="text-indigo-600">"{activity.story}"</span>
-                          )}
+                          {activity.description}
                         </p>
                         <span className="text-xs text-gray-500">{activity.time}</span>
                       </div>
                     </div>
-                  ))}
+                  )) : (
+                    <div className="text-center py-8">
+                      <Calendar className="h-12 w-12 text-gray-300 mx-auto mb-4" />
+                      <p className="text-gray-500">No recent activity</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -222,19 +242,25 @@ const Dashboard = () => {
                 <div>
                   <div className="flex justify-between text-sm mb-2">
                     <span>Stories Published</span>
-                    <span>3/5</span>
+                    <span>{userStats.storiesPublished || 0}/5</span>
                   </div>
                   <div className="w-full bg-white rounded-full h-2">
-                    <div className="bg-indigo-600 h-2 rounded-full w-3/5"></div>
+                    <div 
+                      className="bg-indigo-600 h-2 rounded-full" 
+                      style={{ width: `${Math.min(((userStats.storiesPublished || 0) / 5) * 100, 100)}%` }}
+                    ></div>
                   </div>
                 </div>
                 <div>
                   <div className="flex justify-between text-sm mb-2">
                     <span>Total Views</span>
-                    <span>12.8k/15k</span>
+                    <span>{(userStats.totalViews || 0).toLocaleString()}/1k</span>
                   </div>
                   <div className="w-full bg-white rounded-full h-2">
-                    <div className="bg-purple-600 h-2 rounded-full w-4/5"></div>
+                    <div 
+                      className="bg-purple-600 h-2 rounded-full" 
+                      style={{ width: `${Math.min(((userStats.totalViews || 0) / 1000) * 100, 100)}%` }}
+                    ></div>
                   </div>
                 </div>
               </div>
