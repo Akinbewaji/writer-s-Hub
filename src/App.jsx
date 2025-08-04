@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import Discover from './pages/Discover';
 import Write from './pages/Write';
 import Community from './pages/Community';
-import Profile from './pages/Profile';
+import Profile from './pages/Profile.tsx';
 import StoryDetail from './pages/StoryDetail';
 import Dashboard from './pages/Dashboard';
 import SignIn from './pages/SignIn';
