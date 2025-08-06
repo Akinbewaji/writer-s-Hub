@@ -60,7 +60,12 @@ const RegisterPage: React.FC = () => {
       localStorage.setItem('user', JSON.stringify(user));
       dispatch({ type: 'SET_USER', payload: user });
       
-      router.push('/dashboard');
+      // Redirect based on user role
+      if (user.role === 'writer') {
+        router.push('/writer-home');
+      } else {
+        router.push('/dashboard');
+      }
     } catch (error) {
       setError('email', { message: 'Registration failed. Please try again.' });
     } finally {

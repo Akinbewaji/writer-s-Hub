@@ -67,14 +67,14 @@ const Header: React.FC = () => {
             </Link>
             {state.isAuthenticated && (
               <Link 
-                href="/dashboard" 
+                href={state.user?.role === 'writer' ? '/writer-home' : '/dashboard'}
                 className={`transition-all duration-200 font-semibold px-3 py-2 rounded-lg ${
-                  isActive('/dashboard') 
+                  (isActive('/dashboard') || isActive('/writer-home'))
                     ? 'text-indigo-600 bg-indigo-50' 
                     : 'text-gray-700 hover:text-indigo-600 hover:bg-indigo-50'
                 }`}
               >
-                Dashboard
+                {state.user?.role === 'writer' ? 'Writer Home' : 'Dashboard'}
               </Link>
             )}
           </nav>
@@ -184,11 +184,11 @@ const Header: React.FC = () => {
               {state.isAuthenticated ? (
                 <>
                   <Link 
-                    href="/dashboard" 
+                    href={state.user?.role === 'writer' ? '/writer-home' : '/dashboard'}
                     className="block text-gray-700 hover:text-indigo-600 font-semibold"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Dashboard
+                    {state.user?.role === 'writer' ? 'Writer Home' : 'Dashboard'}
                   </Link>
                   <button
                     onClick={() => {
