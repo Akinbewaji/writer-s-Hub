@@ -113,7 +113,7 @@ const Header: React.FC = () => {
                     className="flex items-center space-x-3 p-2 rounded-xl hover:bg-indigo-50 transition-all duration-200 group"
                   >
                     <div className="w-8 h-8 bg-gradient-to-r from-purple-400 to-indigo-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                      {state.user?.name.charAt(0)}
+                      {state.user?.name?.charAt(0) || 'U'}
                     </div>
                   </button>
 

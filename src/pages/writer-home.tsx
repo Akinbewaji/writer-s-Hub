@@ -142,7 +142,11 @@ const WriterHomePage: React.FC = () => {
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2">
                         <div 
-                          className={`bg-gradient-to-r from-${goal.color}-500 to-${goal.color}-600 h-2 rounded-full transition-all duration-300`}
+                          className={`h-2 rounded-full transition-all duration-300 ${
+                            goal.color === 'indigo' ? 'bg-gradient-to-r from-indigo-500 to-indigo-600' :
+                            goal.color === 'purple' ? 'bg-gradient-to-r from-purple-500 to-purple-600' :
+                            'bg-gradient-to-r from-pink-500 to-pink-600'
+                          }`}
                           style={{ width: `${progress}%` }}
                         ></div>
                       </div>

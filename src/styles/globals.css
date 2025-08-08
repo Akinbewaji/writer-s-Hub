@@ -22,4 +22,20 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+
+  .prose h2 {
+    @apply text-2xl font-bold text-gray-900 mt-8 mb-4;
+  }
+
+  .prose p {
+    @apply text-gray-700 leading-relaxed mb-4;
+  }
+
+  .prose ul {
+    @apply list-disc list-inside mb-4 text-gray-700;
+  }
+
+  .prose li {
+    @apply mb-2;
+  }
 }

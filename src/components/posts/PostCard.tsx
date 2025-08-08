@@ -25,7 +25,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, onLike }) => {
           {/* Author Info */}
           <div className="flex items-center space-x-3 mb-4">
             <div className="w-10 h-10 bg-gradient-to-r from-purple-400 to-indigo-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
-              {post.author.name.charAt(0)}
+              {post.author.name?.charAt(0) || 'U'}
             </div>
             <div>
               <div className="font-semibold text-gray-900">{post.author.name}</div>
