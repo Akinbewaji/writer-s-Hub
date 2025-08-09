@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { TrendingUp, Users, BookOpen, MessageSquare, Eye, Heart, Plus, Edit } from 'lucide-react';
+import { TrendingUp, Users, BookOpen, MessageSquare, Eye, Heart, Plus, Edit, Clock } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
 const DashboardPage: React.FC = () => {
@@ -28,10 +28,34 @@ const DashboardPage: React.FC = () => {
   }
 
   const stats = [
-    { label: 'Total Views', value: '12,847', change: '+12%', icon: Eye, color: 'text-blue-600' },
-    { label: 'Posts Published', value: state.user.stats.postsCount.toString(), change: '+3', icon: BookOpen, color: 'text-green-600' },
-    { label: 'Total Likes', value: state.user.stats.likesReceived.toString(), change: '+8%', icon: Heart, color: 'text-red-600' },
-    { label: 'Followers', value: state.user.stats.followersCount.toString(), change: '+15%', icon: Users, color: 'text-purple-600' }
+    { 
+      label: state.user.role === 'writer' ? 'Total Views' : 'Books Read', 
+      value: state.user.role === 'writer' ? '12,847' : (state.user.stats.booksRead || 0).toString(), 
+      change: '+12%', 
+      icon: state.user.role === 'writer' ? Eye : BookOpen, 
+      color: 'text-blue-600' 
+    },
+    { 
+      label: state.user.role === 'writer' ? 'Posts Published' : 'Pages Read', 
+      value: state.user.role === 'writer' ? state.user.stats.postsCount.toString() : (state.user.stats.pagesRead || 0).toLocaleString(), 
+      change: '+3', 
+      icon: BookOpen, 
+      color: 'text-green-600' 
+    },
+    { 
+      label: state.user.role === 'writer' ? 'Total Likes' : 'Reading Hours', 
+      value: state.user.role === 'writer' ? state.user.stats.likesReceived.toString() : `${state.user.stats.totalReadingTime || 0}h`, 
+      change: '+8%', 
+      icon: state.user.role === 'writer' ? Heart : Clock, 
+      color: 'text-red-600' 
+    },
+    { 
+      label: 'Followers', 
+      value: state.user.stats.followersCount.toString(), 
+      change: '+15%', 
+      icon: Users, 
+      color: 'text-purple-600' 
+    }
   ];
 
   const recentPosts = [

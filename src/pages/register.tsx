@@ -54,6 +54,12 @@ const RegisterPage: React.FC = () => {
           followersCount: 0,
           followingCount: 0,
           likesReceived: 0,
+          // Reader stats
+          booksRead: 0,
+          pagesRead: 0,
+          readingStreak: 0,
+          totalReadingTime: 0,
+          averageRating: 0,
         },
       };
 

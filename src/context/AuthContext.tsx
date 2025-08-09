@@ -13,6 +13,12 @@ export interface User {
     followersCount: number;
     followingCount: number;
     likesReceived: number;
+    // Reader-specific stats
+    booksRead?: number;
+    pagesRead?: number;
+    readingStreak?: number;
+    totalReadingTime?: number;
+    averageRating?: number;
   };
 }
 

@@ -39,6 +39,12 @@ const LoginPage: React.FC = () => {
           followersCount: 120,
           followingCount: 45,
           likesReceived: 234,
+          // Reader stats for demonstration
+          booksRead: 24,
+          pagesRead: 8450,
+          readingStreak: 12,
+          totalReadingTime: 156,
+          averageRating: 4.2,
         },
       };
 
