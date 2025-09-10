@@ -215,7 +215,7 @@ const DashboardPage: React.FC = () => {
                             href={`/posts/edit/${post.id}`}
                             className="text-indigo-600 hover:text-indigo-700"
                           >
-                            <Edit className="h-4 w-4" />
+                            <edit className="h-4 w-4" />
                           </Link>
                         </div>
                       </div>
