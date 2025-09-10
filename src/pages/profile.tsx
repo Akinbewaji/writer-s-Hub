@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { User, Mail, Calendar, BookOpen, Heart, Users, Edit3, Save, Camera, Settings, TrendingUp, Clock, Star } from 'lucide-react';
+import { User, Mail, Calendar, BookOpen, Heart, Users, Edit3, Save, Camera, Settings, TrendingUp, Clock, Star, Activity } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { formatDistanceToNow } from 'date-fns';
 

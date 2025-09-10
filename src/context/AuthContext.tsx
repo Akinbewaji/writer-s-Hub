@@ -59,7 +59,8 @@ type AuthAction =
   | { type: 'DELETE_POST'; payload: string }
   | { type: 'LIKE_POST'; payload: string }
   | { type: 'FOLLOW_WRITER'; payload: string }
-  | { type: 'UNFOLLOW_WRITER'; payload: string };
+  | { type: 'UNFOLLOW_WRITER'; payload: string }
+  | { type: 'BOOKMARK_POST'; payload: string };
 
 const initialState: AuthState = {
   user: null,
@@ -114,6 +115,18 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
                 ...post,
                 isLiked: !post.isLiked,
                 likes: post.isLiked ? post.likes - 1 : post.likes + 1,
+              }
+            : post
+        ),
+      };
+    case 'BOOKMARK_POST':
+      return {
+        ...state,
+        posts: state.posts.map(post =>
+          post.id === action.payload
+            ? {
+                ...post,
+                isBookmarked: !post.isBookmarked,
               }
             : post
         ),

@@ -63,6 +63,10 @@ const PostDetailPage: React.FC = () => {
     dispatch({ type: 'LIKE_POST', payload: post.id });
   };
 
+  const handleBookmark = () => {
+    dispatch({ type: 'BOOKMARK_POST', payload: post.id });
+  };
+
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -201,9 +205,16 @@ const PostDetailPage: React.FC = () => {
                   <span>Share</span>
                 </button>
                 
-                <button className="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
+                <button 
+                  onClick={handleBookmark}
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
+                    post.isBookmarked 
+                      ? 'text-indigo-600 bg-indigo-50' 
+                      : 'text-gray-600 hover:text-indigo-600 hover:bg-indigo-50'
+                  }`}
+                >
                   <Bookmark className="h-4 w-4" />
-                  <span>Save</span>
+                  <span>{post.isBookmarked ? 'Saved' : 'Save'}</span>
                 </button>
               </div>
             </div>

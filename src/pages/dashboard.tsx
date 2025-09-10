@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { TrendingUp, Users, BookOpen, MessageSquare, Eye, Heart, Plus, Edit, Clock, Star, Award, Calendar, Target, Bookmark, Bell } from 'lucide-react';
+import { TrendingUp, Users, BookOpen, MessageSquare, Eye, Heart, Plus, Edit3, Clock, Star, Award, Calendar, Target, Bookmark, Bell } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
 const DashboardPage: React.FC = () => {
@@ -344,7 +344,7 @@ const DashboardPage: React.FC = () => {
             </div>
 
             {/* Goals/Progress */}
-            <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-6 border border-indigo-100">
+            <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-6 border border-indigo-100 mb-6">
               <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
                 <Target className="h-5 w-5 mr-2" />
                 {isWriter ? 'Writing Goals' : 'Reading Goals'}

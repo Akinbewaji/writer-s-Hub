@@ -118,7 +118,7 @@ const Header: React.FC = () => {
                   </button>
 
                   {isProfileMenuOpen && (
-                    <div className="absolute right-0 mt-3 w-56 bg-white rounded-2xl shadow-xl border border-gray-100 py-3">
+                    <div className="absolute right-0 mt-3 w-56 bg-white rounded-2xl shadow-xl border border-gray-100 py-3 z-50">
                       <div className="px-4 py-3 border-b border-gray-100">
                         <div className="font-semibold text-gray-900">{state.user?.name}</div>
                         <div className="text-sm text-gray-500">{state.user?.email}</div>

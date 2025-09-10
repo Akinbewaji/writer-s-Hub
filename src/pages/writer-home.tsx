@@ -134,6 +134,12 @@ const WriterHomePage: React.FC = () => {
               <div className="p-6 space-y-6">
                 {writingGoals.map((goal, index) => {
                   const progress = Math.min((goal.current / goal.target) * 100, 100);
+                  const colorClass = goal.color === 'indigo' 
+                    ? 'bg-gradient-to-r from-indigo-500 to-indigo-600'
+                    : goal.color === 'purple' 
+                    ? 'bg-gradient-to-r from-purple-500 to-purple-600'
+                    : 'bg-gradient-to-r from-pink-500 to-pink-600';
+                    
                   return (
                     <div key={index}>
                       <div className="flex justify-between items-center mb-2">
@@ -142,11 +148,7 @@ const WriterHomePage: React.FC = () => {
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2">
                         <div 
-                          className={`h-2 rounded-full transition-all duration-300 ${
-                            goal.color === 'indigo' ? 'bg-gradient-to-r from-indigo-500 to-indigo-600' :
-                            goal.color === 'purple' ? 'bg-gradient-to-r from-purple-500 to-purple-600' :
-                            'bg-gradient-to-r from-pink-500 to-pink-600'
-                          }`}
+                          className={`h-2 rounded-full transition-all duration-300 ${colorClass}`}
                           style={{ width: `${progress}%` }}
                         ></div>
                       </div>

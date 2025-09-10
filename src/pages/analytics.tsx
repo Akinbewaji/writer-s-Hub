@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { TrendingUp, Eye, Heart, MessageSquare, Users, Calendar, BarChart3, PieChart, Activity } from 'lucide-react';
+import { TrendingUp, Eye, Heart, MessageSquare, Users, Calendar, BarChart3, PieChart, Activity, BookOpen, Clock, Star } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
 const AnalyticsPage: React.FC = () => {
