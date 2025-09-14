@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { TrendingUp, Users, BookOpen, MessageSquare, Eye, Heart, Plus, Edit3, Clock, Star, Award, Calendar, Target, Bookmark, Bell } from 'lucide-react';
+import { TrendingUp, Users, BookOpen, MessageSquare, Eye, Heart, Plus, Edit3, Calendar, Target, Award, Activity, Bookmark, Bell, Clock, Star } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
 const DashboardPage: React.FC = () => {
@@ -337,7 +337,7 @@ const DashboardPage: React.FC = () => {
                   href="/profile"
                   className="w-full text-left p-3 hover:bg-gray-50 rounded-lg transition-colors flex items-center space-x-3"
                 >
-                  <Edit className="h-5 w-5 text-gray-600" />
+                  <Edit3 className="h-5 w-5 text-gray-600" />
                   <span>Edit Profile</span>
                 </Link>
               </div>
