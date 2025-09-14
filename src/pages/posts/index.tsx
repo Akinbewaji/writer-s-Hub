@@ -102,7 +102,9 @@ const PostsPage: React.FC = () => {
   ];
 
   const handleLike = (postId: string) => {
-    dispatch({ type: 'LIKE_POST', payload: postId });
+    console.log('Like post:', postId);
+    // In real app, this would dispatch to context
+    // dispatch({ type: 'LIKE_POST', payload: postId });
   };
 
   const filteredPosts = mockPosts.filter(post => {

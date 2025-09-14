@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { Bell, Heart, MessageSquare, Users, BookOpen, Settings, Check, Trash2, Filter, Activity } from 'lucide-react';
+import { Bell, Heart, MessageSquare, Users, BookOpen, Settings, Check, Trash2, Filter } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { formatDistanceToNow } from 'date-fns';
 

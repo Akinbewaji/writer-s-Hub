@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { Bookmark, Search, Filter, Calendar, Heart, Eye, Clock, Trash2, BookOpen } from 'lucide-react';
+import { Bookmark, Search, Filter, Calendar, Heart, Eye, Clock, Trash2, BookOpen, Star } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { formatDistanceToNow } from 'date-fns';
 

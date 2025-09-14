@@ -131,6 +131,14 @@ const Header: React.FC = () => {
                         <User className="h-5 w-5" />
                         <span>My Profile</span>
                       </Link>
+                      <Link
+                        href="/notifications"
+                        className="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors"
+                        onClick={() => setIsProfileMenuOpen(false)}
+                      >
+                        <Bell className="h-5 w-5" />
+                        <span>Notifications</span>
+                      </Link>
                       <button
                         onClick={handleSignOut}
                         className="flex items-center space-x-3 px-4 py-3 text-red-600 hover:bg-red-50 w-full text-left transition-colors"

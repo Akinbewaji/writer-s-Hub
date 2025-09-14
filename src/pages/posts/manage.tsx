@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { Plus, Edit, Trash2, Eye, Heart, MessageSquare, Search, Calendar } from 'lucide-react';
+import { Plus, Edit3, Trash2, Eye, Heart, MessageSquare, Search, Calendar } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { formatDistanceToNow } from 'date-fns';
 
@@ -206,7 +206,7 @@ const ManagePostsPage: React.FC = () => {
           {sortedPosts.length === 0 ? (
             <div className="text-center py-12">
               <div className="text-gray-400 mb-4">
-                <Edit className="h-16 w-16 mx-auto" />
+                <Edit3 className="h-16 w-16 mx-auto" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">No posts found</h3>
               <p className="text-gray-600 mb-6">
@@ -289,7 +289,7 @@ const ManagePostsPage: React.FC = () => {
                         className="p-2 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
                         title="Edit post"
                       >
-                        <Edit className="h-4 w-4" />
+                        <Edit3 className="h-4 w-4" />
                       </Link>
                       <button
                         onClick={() => handleDelete(post.id)}

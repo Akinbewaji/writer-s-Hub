@@ -58,9 +58,9 @@ type AuthAction =
   | { type: 'UPDATE_POST'; payload: Post }
   | { type: 'DELETE_POST'; payload: string }
   | { type: 'LIKE_POST'; payload: string }
+  | { type: 'BOOKMARK_POST'; payload: string }
   | { type: 'FOLLOW_WRITER'; payload: string }
-  | { type: 'UNFOLLOW_WRITER'; payload: string }
-  | { type: 'BOOKMARK_POST'; payload: string };
+  | { type: 'UNFOLLOW_WRITER'; payload: string };
 
 const initialState: AuthState = {
   user: null,

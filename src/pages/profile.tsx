@@ -163,7 +163,7 @@ const ProfilePage: React.FC = () => {
                     onClick={() => setIsEditing(!isEditing)}
                     className="mt-4 md:mt-0 flex items-center space-x-2 px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
                   >
-                    <Edit3 className="h-4 w-4" />
+                    <Edit3 className="h-5 w-5 text-gray-600" />
                     <span>{isEditing ? 'Cancel' : 'Edit Profile'}</span>
                   </button>
                 </div>

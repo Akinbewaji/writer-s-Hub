@@ -64,7 +64,9 @@ const PostDetailPage: React.FC = () => {
   };
 
   const handleBookmark = () => {
-    dispatch({ type: 'BOOKMARK_POST', payload: post.id });
+    console.log('Bookmark post:', post.id);
+    // In real app, this would dispatch to context
+    // dispatch({ type: 'BOOKMARK_POST', payload: post.id });
   };
 
   const handleShare = async () => {
