@@ -158,9 +158,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     // Check for existing session
     const checkAuth = async () => {
       try {
-        const savedUser = localStorage.getItem('user');
-        if (savedUser) {
-          dispatch({ type: 'SET_USER', payload: JSON.parse(savedUser) });
+        if (typeof window !== 'undefined') {
+          const savedUser = localStorage.getItem('user');
+          if (savedUser) {
+            dispatch({ type: 'SET_USER', payload: JSON.parse(savedUser) });
+          } else {
+            dispatch({ type: 'SET_LOADING', payload: false });
+          }
         } else {
           dispatch({ type: 'SET_LOADING', payload: false });
         }

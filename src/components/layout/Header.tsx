@@ -11,7 +11,9 @@ const Header: React.FC = () => {
   const { state, dispatch } = useAuth();
 
   const handleSignOut = () => {
-    localStorage.removeItem('user');
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('user');
+    }
     dispatch({ type: 'SET_USER', payload: null });
     setIsProfileMenuOpen(false);
     router.push('/');

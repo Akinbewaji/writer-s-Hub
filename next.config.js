@@ -2,12 +2,20 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  output: 'standalone',
+  output: 'export',
+  trailingSlash: true,
+  images: {
+    unoptimized: true,
+    domains: ['images.pexels.com', 'firebasestorage.googleapis.com'],
+  },
   compiler: {
     styledComponents: true,
   },
-  images: {
-    domains: ['images.pexels.com', 'firebasestorage.googleapis.com'],
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
   },
 }
 

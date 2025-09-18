@@ -70,7 +70,7 @@ const PostDetailPage: React.FC = () => {
   };
 
   const handleShare = async () => {
-    if (navigator.share) {
+    if (typeof window !== 'undefined' && navigator.share) {
       try {
         await navigator.share({
           title: post.title,
@@ -82,8 +82,10 @@ const PostDetailPage: React.FC = () => {
       }
     } else {
       // Fallback: copy to clipboard
-      navigator.clipboard.writeText(window.location.href);
-      alert('Link copied to clipboard!');
+      if (typeof window !== 'undefined') {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Link copied to clipboard!');
+      }
     }
   };
 

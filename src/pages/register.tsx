@@ -63,7 +63,9 @@ const RegisterPage: React.FC = () => {
         },
       };
 
-      localStorage.setItem('user', JSON.stringify(user));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('user', JSON.stringify(user));
+      }
       dispatch({ type: 'SET_USER', payload: user });
       
       // Redirect based on user role

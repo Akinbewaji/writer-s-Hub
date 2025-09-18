@@ -52,7 +52,9 @@ const ProfilePage: React.FC = () => {
       bio: data.bio,
     };
 
-    localStorage.setItem('user', JSON.stringify(updatedUser));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+    }
     dispatch({ type: 'SET_USER', payload: updatedUser });
     setIsEditing(false);
   };
