@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ArrowLeft, Heart, MessageCircle, Share2, Bookmark, Clock, User, Calendar } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { formatDistanceToNow } from 'date-fns';
+import { shareContent, copyToClipboard } from '@/utils/helpers';
 
 const PostDetailPage: React.FC = () => {
   const router = useRouter();
@@ -70,22 +71,15 @@ const PostDetailPage: React.FC = () => {
   };
 
   const handleShare = async () => {
-    if (typeof window !== 'undefined' && navigator.share) {
-      try {
-        await navigator.share({
-          title: post.title,
-          text: post.excerpt,
-          url: window.location.href,
-        });
-      } catch (error) {
-        console.log('Error sharing:', error);
-      }
-    } else {
-      // Fallback: copy to clipboard
-      if (typeof window !== 'undefined') {
-        navigator.clipboard.writeText(window.location.href);
-        alert('Link copied to clipboard!');
-      }
+    const success = await shareContent({
+      title: post.title,
+      text: post.excerpt,
+      url: typeof window !== 'undefined' ? window.location.href : '',
+    });
+    
+    if (success && typeof window !== 'undefined') {
+      // Show success message (you could use a toast library here)
+      console.log('Content shared successfully');
     }
   };
 

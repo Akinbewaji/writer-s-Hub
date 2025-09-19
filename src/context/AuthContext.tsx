@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
+import { storage } from '@/utils/helpers';
 
 export interface User {
   id: string;
@@ -158,13 +159,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     // Check for existing session
     const checkAuth = async () => {
       try {
-        if (typeof window !== 'undefined') {
-          const savedUser = localStorage.getItem('user');
-          if (savedUser) {
-            dispatch({ type: 'SET_USER', payload: JSON.parse(savedUser) });
-          } else {
-            dispatch({ type: 'SET_LOADING', payload: false });
-          }
+        const savedUser = storage.get('user');
+        if (savedUser) {
+          dispatch({ type: 'SET_USER', payload: savedUser });
         } else {
           dispatch({ type: 'SET_LOADING', payload: false });
         }

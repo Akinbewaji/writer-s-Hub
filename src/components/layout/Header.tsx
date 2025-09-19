@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Menu, X, BookOpen, PenTool, Users, User, LogOut, Bell, Search } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
+import { storage } from '@/utils/helpers';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,9 +12,7 @@ const Header: React.FC = () => {
   const { state, dispatch } = useAuth();
 
   const handleSignOut = () => {
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('user');
-    }
+    storage.remove('user');
     dispatch({ type: 'SET_USER', payload: null });
     setIsProfileMenuOpen(false);
     router.push('/');

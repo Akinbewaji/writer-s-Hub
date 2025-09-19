@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { Eye, EyeOff, BookOpen, Mail, Lock, User, ArrowRight } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
+import { storage } from '@/utils/helpers';
 
 interface RegisterFormData {
   name: string;
@@ -63,9 +64,7 @@ const RegisterPage: React.FC = () => {
         },
       };
 
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('user', JSON.stringify(user));
-      }
+      storage.set('user', user);
       dispatch({ type: 'SET_USER', payload: user });
       
       // Redirect based on user role

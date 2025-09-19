@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { User, Mail, Calendar, BookOpen, Heart, Users, Edit3, Save, Camera, Settings, TrendingUp, Clock, Star, Activity } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { formatDistanceToNow } from 'date-fns';
+import { storage } from '@/utils/helpers';
 
 interface ProfileFormData {
   name: string;
@@ -52,9 +53,7 @@ const ProfilePage: React.FC = () => {
       bio: data.bio,
     };
 
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('user', JSON.stringify(updatedUser));
-    }
+    storage.set('user', updatedUser);
     dispatch({ type: 'SET_USER', payload: updatedUser });
     setIsEditing(false);
   };
